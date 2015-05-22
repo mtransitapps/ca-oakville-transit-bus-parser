@@ -9,6 +9,7 @@ import org.mtransit.parser.Utils;
 import org.mtransit.parser.gtfs.data.GCalendar;
 import org.mtransit.parser.gtfs.data.GCalendarDate;
 import org.mtransit.parser.gtfs.data.GRoute;
+import org.mtransit.parser.gtfs.data.GSpec;
 import org.mtransit.parser.gtfs.data.GTrip;
 import org.mtransit.parser.mt.data.MAgency;
 import org.mtransit.parser.mt.data.MDirectionType;
@@ -174,18 +175,18 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String CLARKSON_GO = "Clarkson GO";
 	private static final String OAKVILLE_GO = "Oakville GO";
 	private static final String BURLOAK_DR = "Burloak Dr";
-	private static final String SOUTH_CENTER = "South Center";
+	private static final String SOUTH_CENTER = "South Ctr";
 	private static final String UPTOWN_CORE = "Uptown Core";
 	private static final String MAPLE_GROVE = "Maple Grove";
 	private static final String PINE_GLEN = "Pine Glen";
 	private static final String SOUTH_COMMON = "South Common";
-	private static final String RIO_CAN_CENTRE = "RioCan Centre";
+	private static final String RIO_CAN_CENTRE = "RioCan Ctr";
 	private static final String GLEN_ABBEY = "Glen Abbey";
 
 	@Override
-	public void setTripHeadsign(MRoute route, MTrip mTrip, GTrip gTrip) {
+	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
 		String shapeIdLC = gTrip.shape_id.toLowerCase(Locale.ENGLISH);
-		if (route.id == 1l) {
+		if (mRoute.id == 1l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(OAKVILLE_GO, 0);
 				return;
@@ -193,7 +194,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(UPTOWN_CORE, 1);
 				return;
 			}
-		} else if (route.id == 2l) {
+		} else if (mRoute.id == 2l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
@@ -201,7 +202,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (route.id == 3l) {
+		} else if (mRoute.id == 3l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString("South Centre", 0);
 				return;
@@ -209,7 +210,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString("Dundas & Proudfoot", 1);
 				return;
 			}
-		} else if (route.id == 4l) {
+		} else if (mRoute.id == 4l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
@@ -217,7 +218,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (route.id == 5l) {
+		} else if (mRoute.id == 5l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(UPTOWN_CORE, 0);
 				return;
@@ -225,7 +226,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString("Palermo", 1);
 				return;
 			}
-		} else if (route.id == 6l) {
+		} else if (mRoute.id == 6l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
@@ -233,7 +234,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
 			}
-		} else if (route.id == 11l) {
+		} else if (mRoute.id == 11l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(OAKVILLE_GO, 0);
 				return;
@@ -241,7 +242,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MAPLE_GROVE, 1);
 				return;
 			}
-		} else if (route.id == 13l) {
+		} else if (mRoute.id == 13l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(OAKVILLE_GO, 0);
 				return;
@@ -249,7 +250,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BRONTE_GO, 1);
 				return;
 			}
-		} else if (route.id == 14l) {
+		} else if (mRoute.id == 14l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(OAKVILLE_GO, 0);
 				return;
@@ -257,7 +258,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BURLOAK_DR, 1);
 				return;
 			}
-		} else if (route.id == 15l) {
+		} else if (mRoute.id == 15l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(OAKVILLE_GO, 0);
 				return;
@@ -265,7 +266,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SOUTH_CENTER, 1);
 				return;
 			}
-		} else if (route.id == 18l) {
+		} else if (mRoute.id == 18l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(OAKVILLE_GO, 0);
 				return;
@@ -273,7 +274,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(GLEN_ABBEY, 1);
 				return;
 			}
-		} else if (route.id == 19l) {
+		} else if (mRoute.id == 19l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(OAKVILLE_GO, 0);
 				return;
@@ -281,7 +282,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(UPTOWN_CORE, 1);
 				return;
 			}
-		} else if (route.id == 20l) {
+		} else if (mRoute.id == 20l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(OAKVILLE_GO, 0);
 				return;
@@ -289,7 +290,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(UPTOWN_CORE, 1);
 				return;
 			}
-		} else if (route.id == 21l) {
+		} else if (mRoute.id == 21l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(MAPLE_GROVE, 0);
 				return;
@@ -297,7 +298,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CLARKSON_GO, 1);
 				return;
 			}
-		} else if (route.id == 22l) {
+		} else if (mRoute.id == 22l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(BRONTE_GO, 0);
 				return;
@@ -305,7 +306,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(PINE_GLEN, 1);
 				return;
 			}
-		} else if (route.id == 24l) {
+		} else if (mRoute.id == 24l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(OAKVILLE_GO, 0);
 				return;
@@ -313,7 +314,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SOUTH_COMMON, 1);
 				return;
 			}
-		} else if (route.id == 28l) {
+		} else if (mRoute.id == 28l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(OAKVILLE_GO, 0);
 				return;
@@ -321,7 +322,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(GLEN_ABBEY, 1);
 				return;
 			}
-		} else if (route.id == 32l) {
+		} else if (mRoute.id == 32l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(BRONTE_GO, 0);
 				return;
