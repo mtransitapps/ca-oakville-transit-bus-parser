@@ -14,7 +14,7 @@ import org.mtransit.parser.gtfs.data.GTrip;
 import org.mtransit.parser.mt.data.MAgency;
 import org.mtransit.parser.mt.data.MDirectionType;
 import org.mtransit.parser.mt.data.MRoute;
-import org.mtransit.parser.mt.data.MSpec;
+import org.mtransit.parser.CleanUtils;
 import org.mtransit.parser.mt.data.MTrip;
 
 // http://www.oakville.ca/data/oakville-transit-route-information.html
@@ -35,11 +35,11 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public void start(String[] args) {
-		System.out.printf("Generating Oakville Transit bus data...\n");
+		System.out.printf("\nGenerating Oakville Transit bus data...\n");
 		long start = System.currentTimeMillis();
 		this.serviceIds = extractUsefulServiceIds(args, this);
 		super.start(args);
-		System.out.printf("Generating Oakville Transit bus data... DONE in %s.\n", Utils.getPrettyDuration(System.currentTimeMillis() - start));
+		System.out.printf("\nGenerating Oakville Transit bus data... DONE in %s.\n", Utils.getPrettyDuration(System.currentTimeMillis() - start));
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String getRouteLongName(GRoute gRoute) {
-		return MSpec.cleanLabel(gRoute.route_long_name.toLowerCase(Locale.ENGLISH));
+		return CleanUtils.cleanLabel(gRoute.route_long_name.toLowerCase(Locale.ENGLISH));
 	}
 
 	private static final String AGENCY_COLOR = "DCA122"; // GOLD (AGENCY LOGO SVG WIKIPEDIA)
@@ -355,7 +355,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String cleanTripHeadsign(String tripHeadsign) {
-		return MSpec.cleanLabel(tripHeadsign);
+		return CleanUtils.cleanLabel(tripHeadsign);
 	}
 
 	private static final Pattern AND = Pattern.compile("( and )", Pattern.CASE_INSENSITIVE);
@@ -368,7 +368,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 	public String cleanStopName(String gStopName) {
 		gStopName = AT.matcher(gStopName).replaceAll(AT_REPLACEMENT);
 		gStopName = AND.matcher(gStopName).replaceAll(AND_REPLACEMENT);
-		gStopName = MSpec.cleanNumbers(gStopName);
-		return MSpec.cleanLabel(gStopName);
+		gStopName = CleanUtils.cleanNumbers(gStopName);
+		return CleanUtils.cleanLabel(gStopName);
 	}
 }
