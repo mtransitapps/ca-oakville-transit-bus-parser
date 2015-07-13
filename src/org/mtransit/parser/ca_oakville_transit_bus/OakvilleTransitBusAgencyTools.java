@@ -35,7 +35,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public void start(String[] args) {
-		System.out.printf("\nGenerating Oakville Transit bus data...\n");
+		System.out.printf("\nGenerating Oakville Transit bus data...");
 		long start = System.currentTimeMillis();
 		this.serviceIds = extractUsefulServiceIds(args, this);
 		super.start(args);
@@ -185,7 +185,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
-		String shapeIdLC = gTrip.shape_id.toLowerCase(Locale.ENGLISH);
+		String shapeIdLC = gTrip.getShapeId().toLowerCase(Locale.ENGLISH);
 		if (mRoute.id == 1l) {
 			if (shapeIdLC.contains(IN)) {
 				mTrip.setHeadsignString(OAKVILLE_GO, 0);
