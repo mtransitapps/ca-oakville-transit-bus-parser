@@ -73,7 +73,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String getRouteLongName(GRoute gRoute) {
-		return CleanUtils.cleanLabel(gRoute.route_long_name.toLowerCase(Locale.ENGLISH));
+		return CleanUtils.cleanLabel(gRoute.getRouteLongName().toLowerCase(Locale.ENGLISH));
 	}
 
 	private static final String AGENCY_COLOR = "DCA122"; // GOLD (AGENCY LOGO SVG WIKIPEDIA)
@@ -87,7 +87,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public long getRouteId(GRoute gRoute) {
-		if (ROUTE_5A_RTS.equalsIgnoreCase(gRoute.route_short_name)) {
+		if (ROUTE_5A_RTS.equalsIgnoreCase(gRoute.getRouteShortName())) {
 			return 1005l;
 		}
 		return super.getRouteId(gRoute);
@@ -119,10 +119,10 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String getRouteColor(GRoute gRoute) {
-		if (ROUTE_5A_RTS.equalsIgnoreCase(gRoute.route_short_name)) {
+		if (ROUTE_5A_RTS.equalsIgnoreCase(gRoute.getRouteShortName())) {
 			return COLOR_AD4D45;
 		}
-		int routeId = Integer.parseInt(gRoute.route_id);
+		int routeId = Integer.parseInt(gRoute.getRouteId());
 		switch (routeId) {
 		// @formatter:off
 		case 1: return COLOR_DE242C;
