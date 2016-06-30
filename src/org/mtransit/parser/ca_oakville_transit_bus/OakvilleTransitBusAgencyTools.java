@@ -349,7 +349,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { "645", "677", "314", "930", "1212" })) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "1212", "884", "512", "645" })) //
+						Arrays.asList(new String[] { "1212", "884", "1268", "512", "645" })) //
 				.compileBothTripSort());
 		map2.put(14l, new RouteTripSpec(14l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT, //
@@ -397,7 +397,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { "1212", "741", "1293" })) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "1293", "1237", "1212" })) //
+						Arrays.asList(new String[] { "1293", "1237", "288", "1212" })) //
 				.compileBothTripSort());
 		map2.put(21l, new RouteTripSpec(21l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, CLARKSON_GO_RT, //
