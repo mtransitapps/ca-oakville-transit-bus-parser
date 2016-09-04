@@ -214,12 +214,13 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 		case 190: return COLOR_DB214C;
 		// @formatter:on
 		}
-		System.out.printf("\nfUnexpected route ID color for %s!\n", gRoute);
+		System.out.printf("\nUnexpected route ID color for %s!\n", gRoute);
 		System.exit(-1);
 		return null;
 	}
 
 	// trip headsigns used for real-time API
+	private static final String _407_CARPOOL_RT = "407Carpool";
 	private static final String APHS_NORTH_RT = "APHS North";
 	private static final String APHS_SOUTH_RT = "APHS South";
 	private static final String ASPEN_FORST_RT = "AspenForst";
@@ -252,6 +253,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String TAB_WEST_RT = "TAB West";
 	private static final String TO_GWHS_RT = "To GWHS";
 	private static final String TO_HTCSS_RT = "To HTCSS";
+	private static final String TO_OTHS_RT = "To OTHS";
 	private static final String UP_GLN_ABBEY_RT = "UpGlnAbbey";
 	private static final String UPTOWN_CORE_RT = "UptownCore";
 	private static final String VIA_P_GLEN_RT = "via P Glen";
@@ -296,20 +298,36 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "358", "158", "1212", "1143", "645" })) //
 				.compileBothTripSort());
 		map2.put(5l, new RouteTripSpec(5l, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, UPTOWN_CORE_RT, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, PALERMO_RT) //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, _407_CARPOOL_RT) // Walkers Line
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "229", "630", "1293" })) //
+						Arrays.asList(new String[] { //
+						"1575", "630", "1397", //
+								"148", // !=
+								"1293", // ==
+								"750", // !=
+								"1212" //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "1293", "254", "229" })) //
+						Arrays.asList(new String[] { //
+						"1212", //
+								"945", // !=
+								"1293", // ==
+								"187", // !=
+								"254", "1397", "1575" //
+						})) //
 				.compileBothTripSort());
 		map2.put(6l, new RouteTripSpec(6l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, EAST_RT, // Dundas & Hampshire
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, WEST_RT) // Bronte GO
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "645", "287", "910" })) //
+						Arrays.asList(new String[] { //
+						"645", "287", "1550" //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "910", "763", "252", "645" })) //
+						Arrays.asList(new String[] { //
+						"1550", "910", "763", "252", "645" //
+						})) //
 				.compileBothTripSort());
 		map2.put(10l, new RouteTripSpec(10l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT, //
@@ -329,43 +347,86 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, MAPLEGROVE_RT, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "1212", //
-								"1058", "889", //
-								"243", //
-								"157", "453", "597", "292", "1302", //
-								"948", "664" })) //
+						Arrays.asList(new String[] { //
+						"1212", //
+								"358", //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "664", //
-								"351", //
-								"359", //
-								"157", "453", "597", "292", "1302", //
+						Arrays.asList(new String[] { //
+						"358", //
+								"446", //
 								"984", //
-								"950", "770", //
-								"1212" })) //
+								"1212" //
+						})) //
+				.compileBothTripSort());
+		map2.put(12l, new RouteTripSpec(12l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Laird / Ridgeway", //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, CLARKSON_GO_RT) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "358", "1550" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "1550", "991", "358" })) //
 				.compileBothTripSort());
 		map2.put(13l, new RouteTripSpec(13l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRONTE_GO_RT) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "645", "677", "314", "930", "1212" })) //
+						Arrays.asList(new String[] { //
+						"645", "677", "314", "930", //
+								"727", // !=
+								"1050", // ==
+								"336", // !=
+								"1212" //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "1212", "884", "1268", "512", "645" })) //
+						Arrays.asList(new String[] { //
+						"1212", //
+								"1101", // !=
+								"1050", // ==
+								"87", // !=
+								"884", "1268", "512", "645" //
+						})) //
 				.compileBothTripSort());
 		map2.put(14l, new RouteTripSpec(14l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BURLOAK_DR_RT) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "783", "933", "877", "1212" })) //
+						Arrays.asList(new String[] { //
+						"1543", //
+								"963", "933", //
+								"1255", // !=
+								"877", // ==
+								"1182", // !=
+								"509", "1212" //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "1212", "595", "877", "108", "161", "783" })) //
+						Arrays.asList(new String[] { //
+						"1212", "595", //
+								"259", // !=
+								"877", // ==
+								"1109", // !=
+								"108", //
+								"1543" //
+						})) //
 				.compileBothTripSort());
 		map2.put(15l, new RouteTripSpec(15l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, S_OAK_CENTRE_RT) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "877", "46", "1212" })) //
+						Arrays.asList(new String[] { //
+						"1100", "963", "511", //
+								"1307", // !=
+								"515", "139", // ==
+								"854", // !=
+								"46", "1212" //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "1212", "541", "877" })) //
+						Arrays.asList(new String[] { //
+						"1212", "541", //
+								"909", // !=
+								"515", "139", // ==
+								"1091", // !=
+								"1100" })) //
 				.compileBothTripSort());
 		map2.put(17l, new RouteTripSpec(17l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT, //
@@ -379,9 +440,13 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, GA_SOUTH_RT) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "240", "852", "1212" })) //
+						Arrays.asList(new String[] { //
+						"645", "507", "1212" //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "1212", "794", "240" })) //
+						Arrays.asList(new String[] { //
+						"1212", "794", "645" //
+						})) //
 				.compileBothTripSort());
 		map2.put(19l, new RouteTripSpec(19l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, UPTOWN_CORE_RT, //
@@ -449,9 +514,13 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, GA_NORTH_RT) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "564", "986", "226", "922", "1033", "1212" })) //
+						Arrays.asList(new String[] { //
+						"645", "804", "1212" //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "1212", "324", "192", "564" })) //
+						Arrays.asList(new String[] { //
+						"1212", "1555", "645" //
+						})) //
 				.compileBothTripSort());
 		map2.put(32l, new RouteTripSpec(32l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRONTE_GO_RT, //
@@ -465,9 +534,21 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, PALERMO_RT, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRONTE_GO_RT) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "645", "978", "1106" })) //
+						Arrays.asList(new String[] { //
+						"645", "978", "914" //
+						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "1106", "61", "645" })) //
+						Arrays.asList(new String[] { //
+						"914", "61", "645" //
+						})) //
+				.compileBothTripSort());
+		map2.put(34l, new RouteTripSpec(34l, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Pine Glen", //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, BRONTE_GO_RT) //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { "645", "832", "377" })) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { "377", "645" })) //
 				.compileBothTripSort());
 		map2.put(71l, new RouteTripSpec(71l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, UPTOWN_CORE_RT, // WOSS North
@@ -523,7 +604,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { /* no stops */})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "790", "879", "1108" })) //
+						Arrays.asList(new String[] { "790", "879", "1554" })) //
 				.compileBothTripSort());
 		map2.put(82l, new RouteTripSpec(82l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "", //
@@ -593,9 +674,13 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, EAST_IND_RT, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "1212", "522", "1184" })) //
+						Arrays.asList(new String[] { //
+						"1212", "1550" //
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "1184", "904", "1212" })) //
+						Arrays.asList(new String[] { //
+						"1550", "1212" //
+						})) //
 				.compileBothTripSort());
 		map2.put(190l, new RouteTripSpec(190l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, RO_EXPRESS_RT, //
@@ -605,9 +690,6 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { "330", "1301", "1212" })) //
 				.compileBothTripSort());
-		// INCLUDE_ROUTE_ID_GT = null; // DEBUG // TODO null
-		INCLUDE_ROUTE_ID = null; // DEBUG // TODO null
-		// INCLUDE_ROUTE_ID_LT = null; // DEBUG // TODO null
 		ALL_ROUTE_TRIPS2 = map2;
 	}
 
