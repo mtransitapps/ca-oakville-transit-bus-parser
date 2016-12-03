@@ -178,6 +178,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 		case 6: return COLOR_F05B72;
 		case 10: return COLOR_1C4E9D;
 		case 11: return COLOR_201B18;
+		case 12: return "365981";
 		case 13: return COLOR_2EA983;
 		case 14: return COLOR_00A7D8;
 		case 15: return COLOR_EE3429;
@@ -193,6 +194,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 		case 28: return COLOR_CA7A2F;
 		case 32: return COLOR_9DC73E;
 		case 33: return COLOR_8F2E68;
+		case 34: return "CAAD35";
 		case 71: return COLOR_SCHOOL_SPECIALS;
 		case 80: return COLOR_SCHOOL_SPECIALS;
 		case 80 + (int) RID_ENDS_WITH_E: return COLOR_SCHOOL_SPECIALS;
@@ -623,12 +625,22 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "19", "417", "1307" })) //
 				.compileBothTripSort());
 		map2.put(84l, new RouteTripSpec(84l, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "", //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OTHS_GO_RT) // Oakville GO
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, TO_OTHS_RT, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OTHS_GO_RT) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { /* no stops */})) //
+						Arrays.asList(new String[] { //
+						"1212", // Oakville GO Station
+								"1204", // !=
+								"889", // Devon Rd at Oakville Trafalgar High School
+								"243", // !=
+								"1565" // Kingsway Dr + Wynten Way (west)
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "889", "446", "1212" })) //
+						Arrays.asList(new String[] { //
+						"1567", // Wynten Way + Kingsway Dr
+								"1545", // !=
+								"889" // Devon Rd at Oakville Trafalgar High School
+						})) //
 				.compileBothTripSort());
 		map2.put(86l, new RouteTripSpec(86l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, FROM_GWHS_RT, //
