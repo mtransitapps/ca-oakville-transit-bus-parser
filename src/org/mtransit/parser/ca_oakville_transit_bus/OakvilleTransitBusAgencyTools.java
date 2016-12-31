@@ -28,6 +28,7 @@ import org.mtransit.parser.mt.data.MRoute;
 import org.mtransit.parser.mt.data.MTrip;
 import org.mtransit.parser.mt.data.MTripStop;
 
+// http://www.oakville.ca/data/catalogue.html
 // http://www.oakville.ca/data/oakville-transit-route-information.html
 // http://opendata.oakville.ca/Oakville_Transit_GTFS/Google_Transit.zip
 public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
@@ -213,6 +214,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 		case 92: return COLOR_SENIOR_SPECIALS;
 		case 102: return COLOR_221E1F;
 		case 120: return COLOR_DF241A;
+		case 121: return null; // TODO
 		case 190: return COLOR_DB214C;
 		// @formatter:on
 		}
@@ -221,7 +223,8 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 		return null;
 	}
 
-	// trip headsigns used for real-time API
+	// trip head signs used for real-time API
+	// http://busfinder.oakvilletransit.ca/bustime/eta/eta.jsp
 	private static final String _407_CARPOOL_RT = "407Carpool";
 	private static final String APHS_NORTH_RT = "APHS North";
 	private static final String APHS_SOUTH_RT = "APHS South";
@@ -692,6 +695,22 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
 						"1550", "1212" //
+						})) //
+				.compileBothTripSort());
+		map2.put(121l, new RouteTripSpec(121l, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, EAST_IND_RT, // TODO ?
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"1212", // Oakville GO Station
+								"558", //
+								"1620" // Industry St + South Service Rd (east)
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"1620", // Industry St + South Service Rd (east)
+								"1624", //
+								"1212" // Oakville GO Station
 						})) //
 				.compileBothTripSort());
 		map2.put(190l, new RouteTripSpec(190l, //
