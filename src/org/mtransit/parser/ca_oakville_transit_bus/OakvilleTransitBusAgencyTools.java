@@ -218,6 +218,9 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 		case 190: return COLOR_DB214C;
 		// @formatter:on
 		}
+		if (isGoodEnoughAccepted()) {
+			return gRoute.getRouteColor();
+		}
 		System.out.printf("\nUnexpected route ID color for %s!\n", gRoute);
 		System.exit(-1);
 		return null;
@@ -609,7 +612,12 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { /* no stops */})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "790", "879", "1554" })) //
+						Arrays.asList(new String[] { //
+						"790", // "2393", // Nottinghill Gate at Loyola Catholic S.S.
+								"879", // ++
+								"1554", //
+								"1557", // "3182", // Dorval Dr + North Service Rd
+						})) //
 				.compileBothTripSort());
 		map2.put(82l, new RouteTripSpec(82l, //
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "", //
@@ -649,9 +657,17 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, FROM_GWHS_RT, //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, TO_GWHS_RT) //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "1019", "120", "1396" })) //
+						Arrays.asList(new String[] { //
+						"1019", // "2442", // Westoak Trails Blvd + Garth Webb S.S
+								"1564", // ++
+								"1015", // "2229", // 4th Line + Upper Middle Rd West
+						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "315", "141", "1208" })) //
+						Arrays.asList(new String[] { //
+						"315", // "2499", // 4th Line + Glen Valley Rd
+								"141", // ++
+								"1208" // "2443", // West Oak Trails Blvd at Garth Webb S. S.
+						})) //
 				.compileBothTripSort());
 		map2.put(90l, new RouteTripSpec(90l, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, WAL_MART_RT, //
@@ -752,6 +768,10 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
 			return; // split
+		}
+		if (isGoodEnoughAccepted()) {
+			mTrip.setHeadsignString(cleanTripHeadsign(gTrip.getTripHeadsign()), gTrip.getDirectionId() == null ? 0 : gTrip.getDirectionId());
+			return;
 		}
 		System.out.printf("\n%s: Unexpected trip %s.\n", mRoute.getId(), gTrip);
 		System.exit(-1);
