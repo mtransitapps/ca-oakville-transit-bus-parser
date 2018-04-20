@@ -787,13 +787,21 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 								"1212" // Oakville GO Station
 						})) //
 				.compileBothTripSort());
-		map2.put(190l, new RouteTripSpec(190l, //
+		map2.put(190L, new RouteTripSpec(190L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, RO_EXPRESS_RT, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, OAKVILLE_GO_RT) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "1212", "771", "814" })) //
+						Arrays.asList(new String[] { //
+						"1212", // "3172" Oakville GO Station
+								"771", // ++
+								"814", // "2317" Glenashton Dr + Taunton Rd
+						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "330", "1301", "1212" })) //
+						Arrays.asList(new String[] { //
+						"330", // "2870" Glenashton Dr + Taunton Rd
+								"1301", // ++
+								"1026", // "2240" River Oaks Blvd East + Trafalgar Rd
+						})) //
 				.compileBothTripSort());
 		ALL_ROUTE_TRIPS2 = map2;
 	}
