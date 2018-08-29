@@ -108,12 +108,12 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static final Pattern DIGITS = Pattern.compile("[\\d]+");
 
-	private static final long RID_ENDS_WITH_A = 1000l;
-	private static final long RID_ENDS_WITH_B = 2000l;
-	private static final long RID_ENDS_WITH_E = 5000l;
-	private static final long RID_ENDS_WITH_N = 14000l;
-	private static final long RID_ENDS_WITH_S = 19000l;
-	private static final long RID_ENDS_WITH_W = 23000l;
+	private static final long RID_ENDS_WITH_A = 1_000L;
+	private static final long RID_ENDS_WITH_B = 2_000L;
+	private static final long RID_ENDS_WITH_E = 5_000L;
+	private static final long RID_ENDS_WITH_N = 14_000L;
+	private static final long RID_ENDS_WITH_S = 19_000L;
+	private static final long RID_ENDS_WITH_W = 23_000L;
 
 	@Override
 	public long getRouteId(GRoute gRoute) {
@@ -649,15 +649,20 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] {/* no stops */})) //
 				.compileBothTripSort());
-		map2.put(81l + RID_ENDS_WITH_N, new RouteTripSpec(81l + RID_ENDS_WITH_N, // 81N
+		map2.put(81L + RID_ENDS_WITH_N, new RouteTripSpec(81L + RID_ENDS_WITH_N, // 81N
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, APHS_NORTH_RT, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "") //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "451", "939", "61" })) //
+						Arrays.asList(new String[] { //
+						"790", // "2393", // Loyola Catholic S. S.
+								"451", // ++
+								"939", // ++
+								"61", // "3331", // Bronte Rd + Richview Blvd
+						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] {/* no stops */})) //
 				.compileBothTripSort());
-		map2.put(81l + RID_ENDS_WITH_S, new RouteTripSpec(81l + RID_ENDS_WITH_S, // 81S
+		map2.put(81L + RID_ENDS_WITH_S, new RouteTripSpec(81L + RID_ENDS_WITH_S, // 81S
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "", //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, APHS_SOUTH_RT) //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
