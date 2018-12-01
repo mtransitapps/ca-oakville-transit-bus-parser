@@ -237,6 +237,8 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final List<Long> ROUTES_WITHOUT_RT = Arrays.asList(new Long[] { //
 			54L, //
 					55L, //
+					86L + RID_ENDS_WITH_A, // 86A
+					86L + RID_ENDS_WITH_B, // 86B
 			});
 	private static final String APPLEBY_GO_RT = "Appleby GO";
 	private static final String BLAKELOCK_WEST_RT = "Blakelock West";
@@ -350,47 +352,6 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 						"1212", // "3172", // Oakville GO Station
 								"1641", // "2117", // ++ Sixteen Mile Dr + Colton Way
 								"1575", // "2206", // Dundas St + Highway 407 GO Carpool
-						})) //
-				.compileBothTripSort());
-		map2.put(6L, new RouteTripSpec(6L, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, EAST_RT, // Dundas & Hampshire
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, WEST_RT) // Bronte GO
-				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { //
-						"645", // "2421", // Bronte GO Station
-								"1090", // !=
-								"137", // <>
-								"697", // <>
-								"905", // <>
-								"1068", // <>
-								"1054", // !=
-								"409", // != ==
-								"1668", // <> !=
-								"367", // <> !=
-								"1655", // <> !=
-								"326", // != !=
-								"1240", // != ==
-								"1550", // "3174", // Laird Rd + Ridgeway Dr
-						})) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { //
-						"1550", // "3174", // Laird Rd + Ridgeway Dr
-								"1230", // != ==
-								"763", // != !=
-								"1668", // <> !=
-								"367", // <> !=
-								"1655", // <> !=
-								"437", // != ==
-								"1077", // !=
-								"137", // <>
-								"697", // <>
-								"905", // <> ==
-								"537", // !=
-								"1212", // != "3172", // Oakville GO Station
-								"1068", // <> !=
-								"1517", // != ==
-								"981", // ++
-								"645", // "2421", // Bronte GO Station
 						})) //
 				.compileBothTripSort());
 		map2.put(10L, new RouteTripSpec(10L, //
@@ -810,6 +771,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 						"330", // "2870" Glenashton Dr + Taunton Rd
 								"1301", // ++
 								"1026", // "2240" River Oaks Blvd East + Trafalgar Rd
+								"1212", // "3172", // Oakville GO Station
 						})) //
 				.compileBothTripSort());
 		ALL_ROUTE_TRIPS2 = map2;
@@ -843,6 +805,28 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
 			return; // split
+		}
+		if (mRoute.getId() == 6L) {
+			if (gTrip.getDirectionId() == 1) { // EAST - Dundas & Hampshire
+				if (Arrays.asList( //
+						"Laird & Ridgeway via Joshuas Creek", //
+						"Laird & Ridgeway" //
+				).contains(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString(EAST_RT, MDirectionType.EAST.intValue());
+					return;
+				}
+			} else if (gTrip.getDirectionId() == 0) { // WEST - Bronte GO
+				if (Arrays.asList( //
+						"Oakville GO via Joshuas Creek", //
+						"Bronte GO" //
+				).contains(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString(WEST_RT, MDirectionType.WEST.intValue());
+					return;
+				}
+			}
+			System.out.printf("\n%s: Unexpected trips headsign for %s!\n", mTrip.getRouteId(), gTrip);
+			System.exit(-1);
+			return;
 		}
 		if (ROUTES_WITHOUT_RT.contains(mRoute.getId())) {
 			mTrip.setHeadsignString(cleanTripHeadsignWithoutRealTime(gTrip.getTripHeadsign()), gTrip.getDirectionId() == null ? 0 : gTrip.getDirectionId());
