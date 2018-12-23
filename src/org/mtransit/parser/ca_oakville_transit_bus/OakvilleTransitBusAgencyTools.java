@@ -237,8 +237,6 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final List<Long> ROUTES_WITHOUT_RT = Arrays.asList(new Long[] { //
 			54L, //
 					55L, //
-					86L + RID_ENDS_WITH_A, // 86A
-					86L + RID_ENDS_WITH_B, // 86B
 			});
 	private static final String APPLEBY_GO_RT = "Appleby GO";
 	private static final String BLAKELOCK_WEST_RT = "Blakelock West";
@@ -249,6 +247,8 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String EAST_RT = "East";
 	private static final String FALGARWOOD_RT = "Falgarwood";
 	private static final String FROM_GARTH_WEBB_RT = "From Garth Webb";
+	private static final String FROM_GARTH_WEBB_VIA_PROUDFOOT_RT = "From Garth Webb Via Proudfoot";
+	private static final String FROM_GARTH_WEBB_VIA_WESTOAK_RT = "From Garth Webb Via Westoak";
 	private static final String FROM_HOLY_TRINITY_RT = "From Holy Trinity";
 	private static final String FROM_OTHS_RT = "From OTHS";
 	private static final String FROM_LOYOLA_ABBEY_PARK_RT = "From Loyola/Abbey Park";
@@ -693,6 +693,34 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 								"1208" // "2443", // West Oak Trails Blvd at Garth Webb S. S.
 						})) //
 				.compileBothTripSort());
+		map2.put(86L + RID_ENDS_WITH_A, new RouteTripSpec(86L + RID_ENDS_WITH_A, // 86A
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, FROM_GARTH_WEBB_VIA_PROUDFOOT_RT, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, StringUtils.EMPTY) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"1019", // "2442", // Westoak Trails Blvd. + Stratus Dr. (Garth Webb Secondary School)
+								"1637", // ++
+								"1015", // "2229", // Fourth Line north of Upper Middle Rd West
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						/** no stops **/
+						})) //
+				.compileBothTripSort());
+		map2.put(86L + RID_ENDS_WITH_B, new RouteTripSpec(86L + RID_ENDS_WITH_B, // 86A
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, FROM_GARTH_WEBB_VIA_WESTOAK_RT, //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, StringUtils.EMPTY) //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"1019", // "2442", // Westoak Trails Blvd. + Stratus Dr. (Garth Webb Secondary School)
+								"1564", // ++
+								"209", // "2500", // Westoak Trails Blvd + Glen Valley Rd
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						/** no stops **/
+						})) //
+				.compileBothTripSort());
 		map2.put(90L, new RouteTripSpec(90L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, WALMART_RT, //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, JOHN_R_RHODES_RT) //
@@ -817,6 +845,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				}
 			} else if (gTrip.getDirectionId() == 0) { // WEST - Bronte GO
 				if (Arrays.asList( //
+						"Oakville GO", //
 						"Oakville GO via Joshuas Creek", //
 						"Bronte GO" //
 				).contains(gTrip.getTripHeadsign())) {
