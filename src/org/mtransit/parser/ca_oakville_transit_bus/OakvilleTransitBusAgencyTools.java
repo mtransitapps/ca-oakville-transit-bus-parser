@@ -173,63 +173,72 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String getRouteColor(GRoute gRoute) {
-		int routeId = (int) getRouteId(gRoute);
-		switch (routeId) {
-		// @formatter:off
-		case 1: return COLOR_DE242C;
-		case 2: return COLOR_7F1C7D;
-		case 3: return COLOR_4D368A;
-		case 4: return COLOR_8A5032;
-		case 5: return COLOR_AD4D45;
-		case 5 + (int) RID_ENDS_WITH_A: return COLOR_AD4D45;
-		case 6: return COLOR_F05B72;
-		case 10: return COLOR_1C4E9D;
-		case 11: return COLOR_201B18;
-		case 12: return "365981";
-		case 13: return COLOR_2EA983;
-		case 14: return COLOR_00A7D8;
-		case 15: return COLOR_EE3429;
-		case 17: return COLOR_1B6A4D;
-		case 18: return COLOR_333300;
-		case 19: return COLOR_A3238E;
-		case 20: return COLOR_00B5DA;
-		case 21: return COLOR_333300;
-		case 22: return COLOR_333300;
-		case 24: return COLOR_8CBA40;
-		case 25: return COLOR_333300;
-		case 26: return COLOR_B479A6;
-		case 28: return COLOR_CA7A2F;
-		case 32: return COLOR_9DC73E;
-		case 33: return COLOR_8F2E68;
-		case 34: return "CAAD35";
-		case 71: return COLOR_SCHOOL_SPECIALS;
-		case 80: return COLOR_SCHOOL_SPECIALS;
-		case 80 + (int) RID_ENDS_WITH_E: return COLOR_SCHOOL_SPECIALS;
-		case 80 + (int) RID_ENDS_WITH_W: return COLOR_SCHOOL_SPECIALS;
-		case 81: return COLOR_SCHOOL_SPECIALS;
-		case 81 + (int) RID_ENDS_WITH_A: return COLOR_SCHOOL_SPECIALS;
-		case 81 + (int) RID_ENDS_WITH_B: return COLOR_SCHOOL_SPECIALS;
-		case 81 + (int) RID_ENDS_WITH_N: return COLOR_SCHOOL_SPECIALS;
-		case 81 + (int) RID_ENDS_WITH_S: return COLOR_SCHOOL_SPECIALS;
-		case 82: return COLOR_SCHOOL_SPECIALS;
-		case 83: return COLOR_SCHOOL_SPECIALS;
-		case 84: return COLOR_SCHOOL_SPECIALS;
-		case 86: return COLOR_SCHOOL_SPECIALS;
-		case 90: return COLOR_SENIOR_SPECIALS;
-		case 91: return COLOR_SENIOR_SPECIALS;
-		case 92: return COLOR_SENIOR_SPECIALS;
-		case 102: return COLOR_221E1F;
-		case 120: return COLOR_DF241A;
-		case 121: return null; // TODO
-		case 190: return COLOR_DB214C;
-		// @formatter:on
+		String routeColor = gRoute.getRouteColor();
+		if (WHITE.equalsIgnoreCase(routeColor)) {
+			routeColor = null; // can't be white
 		}
-		if (isGoodEnoughAccepted()) {
-			return gRoute.getRouteColor();
+		if (StringUtils.isEmpty(routeColor)) {
+			int routeId = (int) getRouteId(gRoute);
+			switch (routeId) {
+			// @formatter:off
+			case 1: return COLOR_DE242C;
+			case 2: return COLOR_7F1C7D;
+			case 3: return COLOR_4D368A;
+			case 4: return COLOR_8A5032;
+			case 5: return COLOR_AD4D45;
+			case 5 + (int) RID_ENDS_WITH_A: return COLOR_AD4D45; // 5A
+			case 6: return COLOR_F05B72;
+			case 10: return COLOR_1C4E9D;
+			case 11: return COLOR_201B18;
+			case 12: return "365981";
+			case 13: return COLOR_2EA983;
+			case 14: return COLOR_00A7D8;
+			case 14 + (int) RID_ENDS_WITH_A: return COLOR_00A7D8; // 14A
+			case 15: return COLOR_EE3429;
+			case 17: return COLOR_1B6A4D;
+			case 18: return COLOR_333300;
+			case 19: return COLOR_A3238E;
+			case 20: return COLOR_00B5DA;
+			case 21: return COLOR_333300;
+			case 22: return COLOR_333300;
+			case 24: return COLOR_8CBA40;
+			case 25: return COLOR_333300;
+			case 26: return COLOR_B479A6;
+			case 28: return COLOR_CA7A2F;
+			case 32: return COLOR_9DC73E;
+			case 33: return COLOR_8F2E68;
+			case 34: return "CAAD35";
+			case 54: return null; // TODO
+			case 55: return null; // TODO
+			case 71: return COLOR_SCHOOL_SPECIALS;
+			case 80: return COLOR_SCHOOL_SPECIALS;
+			case 80 + (int) RID_ENDS_WITH_E: return COLOR_SCHOOL_SPECIALS; // 80E
+			case 80 + (int) RID_ENDS_WITH_W: return COLOR_SCHOOL_SPECIALS; // 80W
+			case 81: return COLOR_SCHOOL_SPECIALS;
+			case 81 + (int) RID_ENDS_WITH_A: return COLOR_SCHOOL_SPECIALS; // 81A
+			case 81 + (int) RID_ENDS_WITH_B: return COLOR_SCHOOL_SPECIALS; // 81B
+			case 81 + (int) RID_ENDS_WITH_N: return COLOR_SCHOOL_SPECIALS; // 81N
+			case 81 + (int) RID_ENDS_WITH_S: return COLOR_SCHOOL_SPECIALS; // 81S
+			case 82: return COLOR_SCHOOL_SPECIALS;
+			case 83: return COLOR_SCHOOL_SPECIALS;
+			case 84: return COLOR_SCHOOL_SPECIALS;
+			case 86: return COLOR_SCHOOL_SPECIALS;
+			case 86 + (int) RID_ENDS_WITH_B: return COLOR_SCHOOL_SPECIALS; // 86B
+			case 90: return COLOR_SENIOR_SPECIALS;
+			case 91: return COLOR_SENIOR_SPECIALS;
+			case 92: return COLOR_SENIOR_SPECIALS;
+			case 102: return COLOR_221E1F;
+			case 120: return COLOR_DF241A;
+			case 121: return null; // TODO
+			case 190: return COLOR_DB214C;
+			// @formatter:on
+			default:
+				System.out.printf("\nUnexpected route color for %s!\n", gRoute);
+				System.exit(-1);
+				return null;
+			}
 		}
-		System.out.printf("\nUnexpected route ID color for %s!\n", gRoute);
-		System.exit(-1);
-		return null;
+		return routeColor;
 	}
 
 	// trip head signs used for real-time API
