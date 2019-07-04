@@ -310,6 +310,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 90L) {
 			if (Arrays.asList( //
 					"17 Stewart St.", //
+					"Stewart St.", //
 					"John R. Rhodes" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("John R. Rhodes", mTrip.getHeadsignId());
@@ -330,10 +331,20 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 		return false;
 	}
 
+	private static final Pattern GO_ = Pattern.compile("((^|\\W){1}(go)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
+	private static final String GO_REPLACEMENT = "$2" + "GO" + "$4";
+
+	private static final Pattern STARTS_WITH_RSN = Pattern.compile("(^[\\d]+ )", Pattern.CASE_INSENSITIVE);
+
 	private static final Pattern ENDS_WITH_VIA = Pattern.compile("( (via) .*$)", Pattern.CASE_INSENSITIVE);
 
 	private String cleanTripHeadsignWithoutRealTime(String tripHeadsign) {
+		if (Utils.isUppercaseOnly(tripHeadsign, true, true)) {
+			tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
+		}
+		tripHeadsign = STARTS_WITH_RSN.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = ENDS_WITH_VIA.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
+		tripHeadsign = GO_.matcher(tripHeadsign).replaceAll(GO_REPLACEMENT);
 		tripHeadsign = CleanUtils.CLEAN_AND.matcher(tripHeadsign).replaceAll(CleanUtils.CLEAN_AND_REPLACEMENT);
 		tripHeadsign = CleanUtils.cleanSlashes(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
