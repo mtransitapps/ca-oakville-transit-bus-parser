@@ -30,9 +30,9 @@ import org.mtransit.parser.mt.data.MRoute;
 import org.mtransit.parser.mt.data.MTrip;
 import org.mtransit.parser.mt.data.MTripStop;
 
-// http://www.oakville.ca/data/catalogue.html
-// http://www.oakville.ca/data/oakville-transit-route-information.html
-// http://opendata.oakville.ca/Oakville_Transit_GTFS/Google_Transit.zip
+// https://portal-exploreoakville.opendata.arcgis.com/
+// https://portal-exploreoakville.opendata.arcgis.com/datasets/oakville-transit-route-and-schedule-information
+// https://www.arcgis.com/sharing/rest/content/items/d78a1c1ad6a940009de8b68839a8f606/data
 public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	public static void main(String[] args) {
