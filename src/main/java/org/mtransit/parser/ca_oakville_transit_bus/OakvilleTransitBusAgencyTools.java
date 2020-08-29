@@ -139,8 +139,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				return RID_ENDS_WITH_W + digits;
 			}
 		}
-		MTLog.logFatal("Unexpected route ID for %s!", gRoute);
-		return -1l;
+		throw new MTLog.Fatal("Unexpected route ID for %s!", gRoute);
 	}
 
 	private static final String COLOR_DE242C = "DE242C";
@@ -233,8 +232,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 			case 190: return COLOR_DB214C;
 			// @formatter:on
 			default:
-				MTLog.logFatal("Unexpected route color for %s!", gRoute);
-				return null;
+				throw new MTLog.Fatal("Unexpected route color for %s!", gRoute);
 			}
 		}
 		return routeColor;
@@ -242,7 +240,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
-		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
+		HashMap<Long, RouteTripSpec> map2 = new HashMap<>();
 		ALL_ROUTE_TRIPS2 = map2;
 	}
 
@@ -302,6 +300,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 5L) {
 			if (Arrays.asList( //
 					"Hosp", //
+					"Uptown Core", //
 					"Dundas / 407 Carpool" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("Dundas / 407 Carpool", mTrip.getHeadsignId());
@@ -313,6 +312,14 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 					"Bronte GO" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("Bronte GO", mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 14L + RID_ENDS_WITH_A) { // 14A
+			if (Arrays.asList( //
+					"Burloak & Rebecca", //
+					"Appleby GO" //
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Appleby GO", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 34L) {
@@ -332,7 +339,6 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString("John R. Rhodes", mTrip.getHeadsignId());
 				return true;
 			}
-
 		} else if (mTrip.getRouteId() == 121L) {
 			if (Arrays.asList( //
 					"Industry & South Service", //
@@ -342,8 +348,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 				return true;
 			}
 		}
-		MTLog.logFatal("Unexptected trips to merge %s & %s!", mTrip, mTripToMerge);
-		return false;
+		throw new MTLog.Fatal("Unexptected trips to merge %s & %s!", mTrip, mTripToMerge);
 	}
 
 	private static final Pattern GO_ = Pattern.compile("((^|\\W){1}(go)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
@@ -351,12 +356,15 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static final Pattern STARTS_WITH_RSN = Pattern.compile("(^[\\d]+ )", Pattern.CASE_INSENSITIVE);
 
+	private static final Pattern ENDS_WITH_ONLY = Pattern.compile("( only$)", Pattern.CASE_INSENSITIVE);
+
 	private String cleanTripHeadsignWithoutRealTime(String tripHeadsign) {
 		if (Utils.isUppercaseOnly(tripHeadsign, true, true)) {
 			tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
 		}
+		tripHeadsign = CleanUtils.keepToAndRemoveVia(tripHeadsign);
 		tripHeadsign = STARTS_WITH_RSN.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
-		tripHeadsign = CleanUtils.removeVia(tripHeadsign);
+		tripHeadsign = ENDS_WITH_ONLY.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = GO_.matcher(tripHeadsign).replaceAll(GO_REPLACEMENT);
 		tripHeadsign = CleanUtils.CLEAN_AND.matcher(tripHeadsign).replaceAll(CleanUtils.CLEAN_AND_REPLACEMENT);
 		tripHeadsign = CleanUtils.cleanSlashes(tripHeadsign);
