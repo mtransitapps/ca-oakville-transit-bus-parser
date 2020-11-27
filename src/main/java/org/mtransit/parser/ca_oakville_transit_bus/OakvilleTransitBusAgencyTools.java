@@ -86,11 +86,6 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public boolean excludeRoute(GRoute gRoute) {
-		return super.excludeRoute(gRoute);
-	}
-
-	@Override
 	public Integer getAgencyRouteType() {
 		return MAgency.ROUTE_TYPE_BUS;
 	}
@@ -238,7 +233,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 		return routeColor;
 	}
 
-	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
+	private static final HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<>();
 		ALL_ROUTE_TRIPS2 = map2;
@@ -273,9 +268,21 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
 			return; // split
 		}
+		if (mRoute.getId() == 81L + RID_ENDS_WITH_N) { // 81N
+			if (gTrip.getDirectionIdOrDefault() == 1) { // FIXES 2 directions with same ID
+				if ("Bronte and Richview".equals(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString(cleanTripHeadsignWithoutRealTime(gTrip.getTripHeadsign()), 0);
+					return;
+				} else if ("Loyola and Abbey Park".equals(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString(cleanTripHeadsignWithoutRealTime(gTrip.getTripHeadsign()), 1);
+					return;
+				}
+				throw new MTLog.Fatal("Unexpected trip head-sign for %s!", gTrip.toStringPlus());
+			}
+		}
 		mTrip.setHeadsignString( //
 				cleanTripHeadsignWithoutRealTime(gTrip.getTripHeadsign()), //
-				gTrip.getDirectionId() == null ? 0 : gTrip.getDirectionId() //
+				gTrip.getDirectionIdOrDefault() //
 		);
 	}
 
@@ -328,6 +335,15 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 					"Pine Gln" //
 			).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString("Pine Gln", mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 81L + RID_ENDS_WITH_N) { // 81N
+			if (Arrays.asList( //
+					"Bronte & Richview", //
+					"Loyola & Abbey Pk", //
+					"Abbey Pk" // ++
+			).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString("Abbey Pk", mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 90L) {
