@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-// https://portal-exploreoakville.opendata.arcgis.com/
 // https://portal-exploreoakville.opendata.arcgis.com/datasets/oakville-transit-route-and-schedule-information
-// https://www.arcgis.com/sharing/rest/content/items/d78a1c1ad6a940009de8b68839a8f606/data
 public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 
 	public static void main(@NotNull String[] args) {
@@ -70,7 +68,7 @@ public class OakvilleTransitBusAgencyTools extends DefaultAgencyTools {
 		return true;
 	}
 
-	private static final Pattern STARTS_WITH_RSN = Pattern.compile("(^[\\d]+ )", Pattern.CASE_INSENSITIVE);
+	private static final Pattern STARTS_WITH_RSN = Pattern.compile("(^\\d+ )", Pattern.CASE_INSENSITIVE);
 
 	private static final Pattern ENDS_WITH_ONLY = Pattern.compile("( only$)", Pattern.CASE_INSENSITIVE);
 
